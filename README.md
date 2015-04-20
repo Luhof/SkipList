@@ -1,5 +1,5 @@
 # SkipList
-Algorithmic projects<br/>
+Algorithmics project<br/>
 <i>IMAC 2015</i>
 
 #Ce qui marche pour le moment
