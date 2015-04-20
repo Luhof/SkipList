@@ -36,6 +36,9 @@ void printList(skipList *list){
 	printf("\n");*/
 }
 
+node * searchNodeFromList(skipList *list, int key){
+	return NULL;
+}
 
 void freeList(skipList *list){
 	//doesn't work =(
