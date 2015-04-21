@@ -41,7 +41,7 @@ node * searchNodeFromList(skipList *list, int key);
 
 //delete un noeud à une key donnée
 //function machin
-int randLevel(float p, int maxLevel);
+int randLevel(int p, int maxLevel);
 //libère des trucs
 void freeList(skipList *list);
 void freeNode(node *node);

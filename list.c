@@ -2,6 +2,7 @@
 #include "list.h"
 #endif
 
+
 void initList(skipList *list){
 
 	int i;
@@ -39,7 +40,7 @@ int insertNode(skipList *list, int key, int value){
 	
 
 	node *x = list->header;
-	node *update[MAX_LEVEL-1];
+	node *update[MAX_LEVEL];
 
 	int i, level;
 
@@ -59,30 +60,30 @@ int insertNode(skipList *list, int key, int value){
 	}
 	else{
 		printf("entered else\n");
-		level = randLevel(1/2, MAX_LEVEL);
+		//level = randLevel(1/2, MAX_LEVEL);
+		level = randLevel(2.0, MAX_LEVEL-1);
+
 		if(level > list->level){
 			for(i=list->level+1; i<=level; i++){
 				update[i] = list->header;
 			}
 			list->level = level;
 		}
-		printf("level : %d\n", list->level);
-
+		printf("updated update and changed level\nlevel list = %d\n", list->level);
 		x = calloc(1, sizeof(node));
 		x->key = key;
 		x->value = value;
 		x->nextNode = calloc(1, sizeof(node)*level+1);
 
 		printf("\n");
-		for(i=0; i<level; i++){
+		for(i=0; i<=level; i++){
 			
 			x->nextNode[i] = update[i]->nextNode[i];
 			update[i]->nextNode[i] = x;
 		}
-
+		printf("inserted almost lol");
 	}
 	return 0;
-
 }
 
 node * DeleteNode(skipList *list, int key) {
@@ -126,10 +127,11 @@ int level = list->level;
 	return x; 
 }
 
-int randLevel(float p, int maxLevel){
-	int level = 1;
-		while (rand() < p && level < maxLevel)
-        level++;
+int randLevel(int p, int maxLevel){
+	int level = 0;
+		while (rand()%p==0 && level < maxLevel){
+			    level++;  
+		}
 	return level;
 }
 
@@ -137,12 +139,13 @@ node * searchNodeFromList(skipList *list, int key){
 
 	node * x = list->header;
 	int i;
-	for(i=list->level; i>=1; i--){
-		printf("ok lol i : %d\n", i);
+	for(i=list->level; i>=0; i--){
+
 		while(x->nextNode[i]->key < key){
 			printf("key : %d\n", x->key);
 			x = x->nextNode[i];
 		}
+		printf("key : %d\n", x->nextNode[i]->key);
 	}
 	printf("key : %d\n", x->key);
 	if(x->key == key){
