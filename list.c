@@ -86,6 +86,47 @@ node * insertNode(skipList *list, int key, int value){
 
 }
 
+node * DeleteNode(skipList *list, int key) {
+
+node *x = list->header;
+node *update[MAX_LEVEL-1];
+
+int i;
+
+	for (i= list->level-1;i<0;i--) {
+
+		while(x->nextNode[i]-> key < key) {
+		x = x->nextNode[i];
+		}
+
+	update[i] = x;
+	}
+
+x = x->nextNode[0];
+level= list->level;
+
+	if (x->key = key) {
+
+		for(i=0;i>=list->level-1;i++) {
+
+			if(update[i]->nextNode[i] != x) {
+
+				exit(1);
+			}
+			update[i]->nextNode[i] = x->nextNode[i];
+		}
+		free(x);
+
+		while (level>0 && list->header->nextNode[level-1] = NIL) {
+
+			list->level = level-1;
+		}
+
+}
+
+	return x; 
+}
+
 int randLevel(int maxLevel, float p){
 	int level = 0;
 	srand(time(NULL));
