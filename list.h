@@ -1,11 +1,11 @@
 #define NIL NULL
-#define MAX_LEVEL 3
+#define MAX_LEVEL 4
 #define MAX_INT 10000
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 #include <time.h>
-#include <stdlib.h>
 
 
 
@@ -29,7 +29,7 @@ void initList(skipList *list);
 
 //affiche le bottom layer de la liste (liste complète)
 void printList(skipList *list);
-node * insertNode(skipList *list, int key, int value);
+int insertNode(skipList *list, int key, int value);
 //retourne le noeud correspondant à une key donnée
 
 node * DeleteNode(skipList *list, int key);
@@ -41,7 +41,7 @@ node * searchNodeFromList(skipList *list, int key);
 
 //delete un noeud à une key donnée
 //function machin
-int randLevel(int maxLevel, float p);
+int randLevel(float p, int maxLevel);
 //libère des trucs
 void freeList(skipList *list);
 void freeNode(node *node);
