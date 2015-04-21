@@ -17,6 +17,36 @@
 
 int main(int argc, char *argv[]){
 
+	//Lecture d'un fichier (!) test (!) 
+
+	FILE* file = NULL;
+
+	file = fopen("file.rtf", "r");
+	char currentChar;
+
+	if(!file) {
+
+		printf("sorry I can't open the file lol too bad \n");
+	}
+
+	else {
+
+		//instructions de lecture ou d'écriture 
+		printf("LECTURE DU FICHIER :\n");
+		do {
+			currentChar = fgetc(file);
+			printf("%c",currentChar);
+		}
+
+		while(currentChar != EOF);
+
+
+		// on ferme le fichier : 
+		fclose(file);
+
+	}
+
+
 	srand(time(NULL));
 
 	skipList list;
