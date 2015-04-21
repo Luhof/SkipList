@@ -103,9 +103,9 @@ int i;
 	}
 
 x = x->nextNode[0];
-level= list->level;
+int level = list->level;
 
-	if (x->key = key) {
+	if (x->key == key) {
 
 		for(i=0;i>=list->level-1;i++) {
 
@@ -117,7 +117,7 @@ level= list->level;
 		}
 		free(x);
 
-		while (level>0 && list->header->nextNode[level-1] = NIL) {
+		while (level>0 && list->header->nextNode[level-1] == NIL) {
 
 			list->level = level-1;
 		}
