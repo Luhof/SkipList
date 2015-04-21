@@ -81,7 +81,6 @@ int insertNode(skipList *list, int key, int value){
 			x->nextNode[i] = update[i]->nextNode[i];
 			update[i]->nextNode[i] = x;
 		}
-		printf("inserted almost lol");
 	}
 	return 0;
 }
@@ -140,12 +139,14 @@ node * searchNodeFromList(skipList *list, int key){
 	node * x = list->header;
 	int i;
 	for(i=list->level; i>=0; i--){
-		//printf("x key : %d\n", x->key);
+		printf("i : %d\n", i);
 		while(x->nextNode[i]->key < key){
 			x = x->nextNode[i];
+			
 		}
 	}
 
+	printf("x key : %d\n", x->key);
 	x = x->nextNode[0];
 
 	if(x->key == key){
