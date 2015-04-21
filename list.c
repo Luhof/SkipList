@@ -140,14 +140,14 @@ node * searchNodeFromList(skipList *list, int key){
 	node * x = list->header;
 	int i;
 	for(i=list->level; i>=0; i--){
-
+		//printf("x key : %d\n", x->key);
 		while(x->nextNode[i]->key < key){
-			printf("key : %d\n", x->key);
 			x = x->nextNode[i];
 		}
-		printf("key : %d\n", x->nextNode[i]->key);
 	}
-	printf("key : %d\n", x->key);
+
+	x = x->nextNode[0];
+
 	if(x->key == key){
 		return x;
 	}
