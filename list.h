@@ -31,6 +31,9 @@ void initList(skipList *list);
 void printList(skipList *list);
 node * insertNode(skipList *list, int key, int value);
 //retourne le noeud correspondant à une key donnée
+
+node * DeleteNode(skipList *list, int key);
+// supprime un noeud 
 node * searchNodeFromList(skipList *list, int key);
 
 //insère un noeud à une key donnée et valeur.
