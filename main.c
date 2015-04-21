@@ -68,6 +68,20 @@ int main(int argc, char *argv[]){
 		printf("node not found\n");
 	}
 
+	printf("\n----DELETING NODE AT KEY 2----\n");
+	deleteNode(&list, 2);
+
+	printf("\n\n----SEARCHING NODE AT KEY 2------\n");
+	searched = searchNodeFromList(&list, 2);
+	if(searched){
+		printf("node %d found, its value is %d !\n", searched->key, searched->value);
+	}
+	else{
+		printf("node not found\n");
+	}
+
+	printList(&list);
+
 	free(list.header->nextNode);
 	free(list.header);
 	printf("list is free - (have to try valgrind to it)\n");
