@@ -21,7 +21,7 @@ int main(int argc, char *argv[]){
 
 	FILE* file = NULL;
 
-	file = fopen("file.rtf", "r");
+	file = fopen("file.txt", "r");
 	char currentChar;
 
 	if(!file) {
@@ -37,9 +37,7 @@ int main(int argc, char *argv[]){
 			currentChar = fgetc(file);
 			printf("%c",currentChar);
 		}
-
 		while(currentChar != EOF);
-
 
 		// on ferme le fichier : 
 		fclose(file);
@@ -52,31 +50,17 @@ int main(int argc, char *argv[]){
 	skipList list;
 	initList(&list);
 
-	printf("----INSERING SOME NODES YO------\n");
+	printf("\n\n----INSERING SOME NODES YO------\n");
 	insertNode(&list, 2, 1);
 	insertNode(&list, 5, 42);
+	insertNode(&list, 7, 3);
+	insertNode(&list, 3, 20);
 	printList(&list);
 
-	printf("----SEARCHING NODE AT KEY 2------\n");
+	printf("max list level : %d\n", list.level);
+
+	printf("\n\n----SEARCHING NODE AT KEY 2------\n");
 	node *searched = searchNodeFromList(&list, 2);
-	if(searched){
-		printf("node %d found, its value is %d !\n", searched->key, searched->value);
-	}
-	else{
-		printf("node not found\n");
-	}
-
-	printf("----SEARCHING NODE AT KEY 3------\n");
-	searched = searchNodeFromList(&list, 2);
-	if(searched){
-		printf("node %d found, its value is %d !\n", searched->key, searched->value);
-	}
-	else{
-		printf("node not found\n");
-	}
-
-	printf("----SEARCHING NODE AT KEY 5------\n");
-	searched = searchNodeFromList(&list, 5);
 	if(searched){
 		printf("node %d found, its value is %d !\n", searched->key, searched->value);
 	}
