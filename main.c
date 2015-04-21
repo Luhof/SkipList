@@ -37,7 +37,7 @@ int main(int argc, char *argv[]){
 	}
 
 	printf("----SEARCHING NODE AT KEY 3------\n");
-	searched = searchNodeFromList(&list, 3);
+	searched = searchNodeFromList(&list, 2);
 	if(searched){
 		printf("node %d found, its value is %d !\n", searched->key, searched->value);
 	}

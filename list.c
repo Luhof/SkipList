@@ -135,18 +135,21 @@ int randLevel(int p, int maxLevel){
 }
 
 node * searchNodeFromList(skipList *list, int key){
-
+	printf("list header key : %d\n", list->header->key);
 	node * x = list->header;
 	int i;
+	printf("level : %d\n", list->level);
 	for(i=list->level; i>=0; i--){
-		printf("i : %d\n", i);
+		printf("enteredfor i : %d\n", i);
 		while(x->nextNode[i]->key < key){
+			
 			x = x->nextNode[i];
 			
 		}
+		printf("\n");
+		printf("i : %d\nx->key : %d\n", i, x->key);
 	}
-
-	printf("x key : %d\n", x->key);
+	//printf("x key : %d\n", x->key);
 	x = x->nextNode[0];
 
 	if(x->key == key){
