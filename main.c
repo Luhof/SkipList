@@ -60,7 +60,7 @@ int main(int argc, char *argv[]){
 	printf("max list level : %d\n", list.level);
 
 	printf("\n\n----SEARCHING NODE AT KEY 2------\n");
-	node *searched = searchNodeFromList(&list, 2);
+	node * searched = searchNodeFromList(&list, 2);
 	if(searched){
 		printf("node %d found, its value is %d !\n", searched->key, searched->value);
 	}
@@ -68,11 +68,11 @@ int main(int argc, char *argv[]){
 		printf("node not found\n");
 	}
 
-	printf("\n----DELETING NODE AT KEY 2----\n");
+	printf("\n----DELETING NODE AT KEY 2----");
 	deleteNode(&list, 2);
 
-	printf("\n\n----SEARCHING NODE AT KEY 2------\n");
-	searched = searchNodeFromList(&list, 2);
+	printf("\n\n----SEARCHING NODE AT KEY 5------\n");
+	searched = searchNodeFromList(&list, 5);
 	if(searched){
 		printf("node %d found, its value is %d !\n", searched->key, searched->value);
 	}
@@ -82,8 +82,9 @@ int main(int argc, char *argv[]){
 
 	printList(&list);
 
-	free(list.header->nextNode);
-	free(list.header);
+	searched = NIL;
+	freeList(&list);
+
 	printf("list is free - (have to try valgrind to it)\n");
 
 	return 0;

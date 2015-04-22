@@ -14,7 +14,7 @@ void initList(skipList *list){
 	//ce niveau sera modifié au fil du temps (lors des insert) afin d'obtenir le niveau maximal du moment
 	list->level = 0;
 
-	if((list->header->nextNode = calloc(2, sizeof(node*) * MAX_LEVEL+1)) == 0){
+	if((list->header->nextNode = calloc(1, sizeof(node*) * MAX_LEVEL+1)) == 0){
         printf("Error w/ memory\n");
         exit(EXIT_FAILURE);
     }
@@ -150,25 +150,15 @@ node * searchNodeFromList(skipList *list, int key){
 }
 
 void freeList(skipList *list){
-	//doesn't work =(
-
-	/*printf("deleting node\n");
-	freeNode(list->header->nextNode);
-	printf("deleted node\n");
-	free(list->header);*/
+	node *x = list->header;
+	while(x->nextNode[0]!=NIL){
+		free(x);
+		x = x->nextNode[0];
+	}
+	free(x);
 }
 
-void freeNode(node *node){
 
-	//doesn't work =(
-
-	/*printf("yaaay\n");
-	if(node){
-		printf("lolmdr\n");
-		free(node->nextNode);
-		free(node);
-	}*/ 
-}
 
 
 
