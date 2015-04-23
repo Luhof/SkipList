@@ -1,4 +1,4 @@
-# SkipList
+# SkipList implementation in C
 Algorithmics project<br/>
 <i>IMAC 2015</i>
 
