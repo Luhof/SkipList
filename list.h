@@ -1,13 +1,12 @@
 #define NIL NULL
 #define MAX_LEVEL 4
 #define MAX_INT 10000
+#define MAX_CHAR 100
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
-#include <time.h>
-
-
+#include <string.h>
 
 typedef struct node{
 
@@ -24,24 +23,13 @@ typedef struct skipList{
 
 }skipList;
 
-//initialise la liste
-void initList(skipList *list);
 
-//affiche le bottom layer de la liste (liste complète)
+void initList(skipList *list);
+void initializeFromFile(skipList *list, char *fileAdress);
 void printList(skipList *list);
 int insertNode(skipList *list, int key, int value);
-//retourne le noeud correspondant à une key donnée
-
 int deleteNode(skipList *list, int key);
-// supprime un noeud 
 node * searchNodeFromList(skipList *list, int key);
-
-//insère un noeud à une key donnée et valeur.
-//function machin
-
-//delete un noeud à une key donnée
-//function machin
 int randLevel(int p, int maxLevel);
-//libère des trucs
 void freeList(skipList *list);
 void freeNode(node *node);

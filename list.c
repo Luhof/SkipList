@@ -26,6 +26,48 @@ void initList(skipList *list){
 
 }
 
+void initializeFromFile(skipList *list, char *fileAdress){
+	FILE* file = NULL;
+
+	printf("%s\n", fileAdress);
+	file = fopen(fileAdress, "r");
+
+	char tempLine[MAX_CHAR];
+	int tempVal;
+	int tempKey;
+
+	if(!file) {
+		printf("sorry I can't open the file lol too bad\n");
+		exit(1);
+	}
+
+	/*	check if the file is just a value per line
+		in this case, each value is key AND value.
+		Else, if it's two integers separated with a ",",
+		first number is Key and second one is Value.
+	*/
+
+
+	while(fgets(tempLine, MAX_CHAR, file) != NIL){
+		if(strstr(tempLine, ",")==NIL){
+			tempKey = atoi(tempLine);
+			tempVal = tempKey;
+		}
+		else{
+			//file is separated with a ','
+			tempKey = atoi(strtok(tempLine, ","));
+			tempVal = atoi(strtok(NIL, ","));
+		}
+		
+		insertNode(list, tempKey, tempVal);
+	}
+
+
+		// on ferme le fichier : 
+		fclose(file);
+
+}
+
 void printList(skipList *list){
 
 	node * x = list->header;
@@ -68,7 +110,7 @@ int insertNode(skipList *list, int key, int value){
 			list->level = level;
 		}
 
-		printf("level of node %d = %d\n",key, level);
+		printf("inserted node %d[%d] (level %d)\n",key, value, level);
 		x = calloc(1, sizeof(node));
 		x->key = key;
 		x->value = value;
@@ -90,7 +132,7 @@ int deleteNode(skipList *list, int key) {
 	int i;
 		for (i= list->level;i>=0;i--) {
 
-			while(x->nextNode[i]-> key < key) {
+			while(x!=NIL && x->nextNode[i]-> key < key) {
 				x = x->nextNode[i];
 			}
 			update[i] = x;
@@ -101,14 +143,11 @@ int deleteNode(skipList *list, int key) {
 		if (x->key == key) {
 
 			for(i=0;i<=list->level;i++) {
-
 				if(update[i]->nextNode[i] != x) {
 					break;
 				}
-
 				update[i]->nextNode[i] = x->nextNode[i];
 			}
-
 			free(x->nextNode);
 			free(x);
 
@@ -158,8 +197,6 @@ void freeList(skipList *list){
 	free(x->nextNode);
 	free(x);
 }
-
-
 
 
 

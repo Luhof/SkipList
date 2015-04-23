@@ -19,30 +19,6 @@ int main(int argc, char *argv[]){
 
 	//Lecture d'un fichier (!) test (!) 
 
-	FILE* file = NULL;
-
-	file = fopen("file.txt", "r");
-	char currentChar;
-
-	if(!file) {
-
-		printf("sorry I can't open the file lol too bad \n");
-	}
-
-	else {
-
-		//instructions de lecture ou d'écriture 
-		printf("LECTURE DU FICHIER :\n");
-		do {
-			currentChar = fgetc(file);
-			printf("%c",currentChar);
-		}
-		while(currentChar != EOF);
-
-		// on ferme le fichier : 
-		fclose(file);
-
-	}
 
 
 	srand(time(NULL));
@@ -50,11 +26,18 @@ int main(int argc, char *argv[]){
 	skipList list;
 	initList(&list);
 
-	printf("\n\n----INSERING SOME NODES YO------\n");
-	insertNode(&list, 2, 1);
-	insertNode(&list, 5, 42);
-	insertNode(&list, 7, 3);
-	insertNode(&list, 3, 20);
+	if(argc>1){
+		initializeFromFile(&list, argv[1]);
+	}
+	else{
+		printf("To import a file run ./prog pathtofile.txt\n");
+		printf("\n\n----INSERING SOME NODES ------\n");
+		insertNode(&list, 2, 1);
+		insertNode(&list, 5, 42);
+		insertNode(&list, 7, 3);
+		insertNode(&list, 3, 20);
+	}
+
 	printList(&list);
 
 	printf("\n\n----SEARCHING NODE AT KEY 2------\n");
