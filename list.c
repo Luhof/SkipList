@@ -72,7 +72,7 @@ int insertNode(skipList *list, int key, int value){
 		x = calloc(1, sizeof(node));
 		x->key = key;
 		x->value = value;
-		x->nextNode = calloc(1, sizeof(node*)*level+1);
+		x->nextNode = calloc(1, sizeof(node*)*(level+1));
 
 		for(i=0; i<=level; i++){
 			x->nextNode[i] = update[i]->nextNode[i];
@@ -109,6 +109,7 @@ int deleteNode(skipList *list, int key) {
 				update[i]->nextNode[i] = x->nextNode[i];
 			}
 
+			free(x->nextNode);
 			free(x);
 
 			while (list->level>0 && list->header->nextNode[list->level] == NIL) {
@@ -152,9 +153,9 @@ node * searchNodeFromList(skipList *list, int key){
 void freeList(skipList *list){
 	node *x = list->header;
 	while(x->nextNode[0]!=NIL){
-		free(x);
-		x = x->nextNode[0];
+		deleteNode(list, x->nextNode[0]->key);
 	}
+	free(x->nextNode);
 	free(x);
 }
 

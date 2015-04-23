@@ -57,8 +57,6 @@ int main(int argc, char *argv[]){
 	insertNode(&list, 3, 20);
 	printList(&list);
 
-	printf("max list level : %d\n", list.level);
-
 	printf("\n\n----SEARCHING NODE AT KEY 2------\n");
 	node * searched = searchNodeFromList(&list, 2);
 	if(searched){
@@ -82,10 +80,9 @@ int main(int argc, char *argv[]){
 
 	printList(&list);
 
-	searched = NIL;
 	freeList(&list);
 
-	printf("list is free - (have to try valgrind to it)\n");
+	printf("(list is free - valgrinded with 0 bytes lost)\n");
 
 	return 0;
 }
