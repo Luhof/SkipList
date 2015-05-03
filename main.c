@@ -1,3 +1,5 @@
+//this code is also available on my github : https://github.com/Luhof/SkipList
+
 #define NIL NULL
 #define MAX_LEVEL 4
 #define MAX_INT 10000
@@ -17,10 +19,6 @@
 
 int main(int argc, char *argv[]){
 
-	//Lecture d'un fichier (!) test (!) 
-
-
-
 	srand(time(NULL));
 
 	skipList list;
@@ -30,7 +28,8 @@ int main(int argc, char *argv[]){
 		initializeFromFile(&list, argv[1]);
 	}
 	else{
-		printf("To import a file run ./prog pathtofile.txt\n");
+		printf("\n****\nTo import a file run ./prog pathtofile.txt\nuse file.txt or file.csv :)\n****\n");
+
 		printf("\n\n----INSERING SOME NODES ------\n");
 		insertNode(&list, 2, 1);
 		insertNode(&list, 5, 42);

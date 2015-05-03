@@ -10,8 +10,8 @@ void initList(skipList *list){
 	list->header = calloc(1, sizeof(node));
 	list->header->key = MAX_INT;
 
-	//le niveau (hauteur) de la liste ne prend pas en compte le header
-	//ce niveau sera modifié au fil du temps (lors des insert) afin d'obtenir le niveau maximal du moment
+	//level (height) of the list doesn't use header...
+	//This level will be modified later (with various insert and deletes) so we can get maximal level.
 	list->level = 0;
 
 	if((list->header->nextNode = calloc(1, sizeof(node*) * MAX_LEVEL+1)) == 0){
@@ -19,7 +19,7 @@ void initList(skipList *list){
         exit(EXIT_FAILURE);
     }
 
-    //les 4 pointeurs du header pointent sur null
+    //4 header pointers are leading to NIL
     for(i=0; i<MAX_LEVEL; i++){
     	list->header->nextNode[i] = NIL;
     }
@@ -54,7 +54,7 @@ void initializeFromFile(skipList *list, char *fileAdress){
 			tempVal = tempKey;
 		}
 		else{
-			//file is separated with a ','
+			//file is separated with a ',', like a .csv file.
 			tempKey = atoi(strtok(tempLine, ","));
 			tempVal = atoi(strtok(NIL, ","));
 		}
@@ -63,7 +63,7 @@ void initializeFromFile(skipList *list, char *fileAdress){
 	}
 
 
-		// on ferme le fichier : 
+		// closing file 
 		fclose(file);
 
 }
@@ -125,20 +125,19 @@ int insertNode(skipList *list, int key, int value){
 }
 
 int deleteNode(skipList *list, int key) {
-
 	node *x = list->header;
 	node *update[MAX_LEVEL+1];
 
 	int i;
-		for (i= list->level;i>=0;i--) {
-
-			while(x!=NIL && x->nextNode[i]-> key < key) {
+		for (i=list->level;i>=0;i--) {
+			while(x!=NIL && x->nextNode[i]!=NIL && x->nextNode[i]-> key < key) {
 				x = x->nextNode[i];
 			}
 			update[i] = x;
 		}
 
-	x = x->nextNode[0];
+	if(x->nextNode[0]!=NIL)
+		x = x->nextNode[0];
 
 		if (x->key == key) {
 
@@ -162,6 +161,7 @@ int deleteNode(skipList *list, int key) {
 
 int randLevel(int p, int maxLevel){
 	int level = 0;
+		//higher p level seems -seems- to make launch a little bit longer
 		while (rand()%p==0 && level < maxLevel){
 			    level++;  
 		}
@@ -178,8 +178,9 @@ node * searchNodeFromList(skipList *list, int key){
 			x = x->nextNode[i];		
 		}
 	}
-	//printf("x key : %d\n", x->key);
-	x = x->nextNode[0];
+ 
+ 	if(x->nextNode[0] != NIL)
+		x = x->nextNode[0];
 
 	if(x->key == key){
 		return x;
