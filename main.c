@@ -64,7 +64,7 @@ int main(int argc, char *argv[]){
 
 	freeList(&list);
 
-	printf("(list is free - valgrinded with 0 bytes lost)\n");
+	printf("(list is free - valgrinded with 0 bytes lost)\n--but some still reachable");
 
 	return 0;
 }

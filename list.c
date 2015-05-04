@@ -7,14 +7,14 @@ void initList(skipList *list){
 
 	int i;
 	
-	list->header = calloc(1, sizeof(node));
+	list->header = calloc(1, sizeof(node*));
 	list->header->key = MAX_INT;
 
 	//level (height) of the list doesn't use header...
 	//This level will be modified later (with various insert and deletes) so we can get maximal level.
 	list->level = 0;
 
-	if((list->header->nextNode = calloc(1, sizeof(node*) * MAX_LEVEL+1)) == 0){
+	if((list->header->nextNode = calloc(MAX_LEVEL+1, sizeof(node*))) == 0){
         printf("Error w/ memory\n");
         exit(EXIT_FAILURE);
     }
@@ -109,17 +109,19 @@ int insertNode(skipList *list, int key, int value){
 			}
 			list->level = level;
 		}
-
-		printf("inserted node %d[%d] (level %d)\n",key, value, level);
+		
 		x = calloc(1, sizeof(node));
 		x->key = key;
 		x->value = value;
-		x->nextNode = calloc(1, sizeof(node*)*(level+1));
+		x->nextNode = calloc(level+1, sizeof(node*));
 
 		for(i=0; i<=level; i++){
 			x->nextNode[i] = update[i]->nextNode[i];
 			update[i]->nextNode[i] = x;
 		}
+
+		printf("inserted node %d[%d] (level %d)\n",key, value, level);	
+
 	}
 	return 0;
 }
