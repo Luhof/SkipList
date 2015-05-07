@@ -37,7 +37,7 @@ int main(int argc, char *argv[]){
 		insertNode(&list, 3, 20);
 	}
 
-	printList(&list);
+	//printList(&list);
 
 	printf("\n\n----SEARCHING NODE AT KEY 2------\n");
 	node * searched = searchNodeFromList(&list, 2);

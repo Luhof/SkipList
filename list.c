@@ -69,13 +69,19 @@ void initializeFromFile(skipList *list, char *fileAdress){
 }
 
 void printList(skipList *list){
-
+	int i;
 	node * x = list->header;
-	while(x != NIL && x->nextNode[0] != list->header){
+	for(i=list->level; i>=0; i--){
+		printf("level %d\n", i);
+		while(x != NIL && x->nextNode[i] != list->header){
 		printf("%d[%d] -> ", x->key, x->value);
-		x = x->nextNode[0];
+		x = x->nextNode[i];
 	}
-	printf("NIL\n");
+		printf("NIL\n");
+		x = list->header;
+	}
+	printf("\n");
+	
 
 }
 
